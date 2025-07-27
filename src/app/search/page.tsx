@@ -205,7 +205,7 @@ function SearchContent() {
 
                 <button
                   onClick={applyFilters}
-                  className="w-full bg-gradient-primary text-white py-2 px-4 rounded-md hover:opacity-90 transition-all duration-200 shadow-soft hover:shadow-medium"
+                  className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition-all duration-200 shadow-soft hover:shadow-medium"
                 >
                   Apply Filters
                 </button>

@@ -154,7 +154,7 @@ export default function SearchBar() {
           <select
             value={searchType}
             onChange={(e) => setSearchType(e.target.value as SearchType)}
-            className="flex-shrink-0 z-10 inline-flex items-center py-3 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
+            className="flex-shrink-0 z-10 inline-flex items-center py-3 px-4 text-sm font-medium text-foreground bg-muted border border-border rounded-l-lg hover:bg-muted/80 focus:ring-1 focus:ring-primary focus:outline-none"
           >
             {Object.entries(searchTypeLabels).map(([value, label]) => (
               <option key={value} value={value}>{label}</option>
@@ -165,7 +165,7 @@ export default function SearchBar() {
           <div className="relative flex-1">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg 
-                className="h-5 w-5 text-gray-400" 
+                className="h-5 w-5 text-muted-foreground" 
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -186,13 +186,13 @@ export default function SearchBar() {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={`Search for ${searchTypeLabels[searchType].toLowerCase()}...`}
-              className="block w-full pl-10 pr-3 py-3 border-t border-b border-gray-300 leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-lg text-black"
+              className="block w-full pl-10 pr-3 py-3 border-t border-b border-border leading-5 bg-background placeholder-muted-foreground focus:outline-none focus:placeholder-muted-foreground/50 focus:ring-1 focus:ring-primary focus:border-primary text-lg text-foreground"
               autoComplete="off"
             />
 
             {isLoading && (
               <div className="absolute right-16 top-1/2 transform -translate-y-1/2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-indigo-600"></div>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
               </div>
             )}
           </div>
@@ -200,7 +200,7 @@ export default function SearchBar() {
           {/* Search button */}
           <button
             type="submit"
-            className="flex-shrink-0 px-6 text-white bg-indigo-600 hover:bg-indigo-700 rounded-r-lg transition-colors font-medium border border-indigo-600"
+            className="flex-shrink-0 px-6 text-primary-foreground bg-primary hover:bg-primary/90 rounded-r-lg transition-colors font-medium border border-primary"
           >
             Search
           </button>
@@ -210,7 +210,7 @@ export default function SearchBar() {
         {isOpen && suggestions.length > 0 && (
           <div
             ref={dropdownRef}
-            className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto"
+            className="absolute z-50 w-full mt-1 bg-background border border-border rounded-md shadow-lg max-h-60 overflow-auto"
             style={{ left: '89px' }} // Offset to align with input field
           >
             {suggestions.map((suggestion, index) => (
@@ -219,14 +219,14 @@ export default function SearchBar() {
                 onClick={() => handleSuggestionClick(suggestion)}
                 className={`px-3 py-2 cursor-pointer text-sm ${
                   index === selectedIndex
-                    ? 'bg-indigo-50 text-indigo-900'
-                    : 'text-gray-900 hover:bg-gray-50'
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-foreground hover:bg-muted'
                 }`}
               >
                 {searchType === 'pi_name' ? (
                   <div className="flex flex-col">
                     <span className="font-medium">{suggestion.split(' (')[0]}</span>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-muted-foreground">
                       {suggestion.includes('(') ? suggestion.split(' (')[1]?.replace(')', '') : ''}
                     </span>
                   </div>

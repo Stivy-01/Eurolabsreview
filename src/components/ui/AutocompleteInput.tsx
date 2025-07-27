@@ -151,7 +151,7 @@ export default function AutocompleteInput({
   return (
     <div className="relative">
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-primary">
           {label} {required && '*'}
         </label>
       )}

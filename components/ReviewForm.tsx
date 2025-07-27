@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import AutocompleteInput from '../src/components/ui/AutocompleteInput'
+import AutocompleteInput from '@/components/ui/AutocompleteInput'
 
 interface ReviewFormProps {
   onSuccess: () => void
@@ -259,11 +259,11 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
     description?: string
   }) => (
     <div className="mb-6">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        {label}: <span className="text-indigo-600 font-semibold">{value}/5</span>
+      <label className="block text-sm font-medium text-primary mb-2">
+        {label}: <span className="text-primary font-semibold">{value}/5</span>
       </label>
       {description && (
-        <p className="text-xs text-gray-500 mb-2">{description}</p>
+        <p className="text-xs text-muted-foreground mb-2">{description}</p>
       )}
       <input
         type="range"
@@ -271,12 +271,12 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
         max="5"
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+        className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer slider"
         style={{
-          background: `linear-gradient(to right, #4f46e5 0%, #4f46e5 ${((value-1)/4)*100}%, #e5e7eb ${((value-1)/4)*100}%, #e5e7eb 100%)`
+          background: `linear-gradient(to right, oklch(0.488 0.243 264.376) 0%, oklch(0.488 0.243 264.376) ${((value-1)/4)*100}%, oklch(0.97 0.001 106.424) ${((value-1)/4)*100}%, oklch(0.97 0.001 106.424) 100%)`
         }}
       />
-      <div className="flex justify-between text-xs text-gray-500 mt-1">
+      <div className="flex justify-between text-xs text-muted-foreground mt-1">
         <span>Poor (1)</span>
         <span>Fair (2)</span>
         <span>Good (3)</span>
@@ -347,15 +347,15 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
       {/* Position and Year */}
       <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-primary mb-2">
             Your Position *
           </label>
           <select
             value={formData.position}
             onChange={(e) => handleFieldChange('position', e.target.value as FormData['position'])}
             onBlur={() => handleBlur('position')}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 text-black ${
-              errors.position ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 text-primary bg-background ${
+              errors.position ? 'border-destructive focus:ring-destructive' : 'border-border focus:ring-primary focus:border-primary'
             }`}
           >
             <option value="">Select position</option>
@@ -364,17 +364,17 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
             <option value="Intern">Intern</option>
             <option value="Visitor">Visiting Researcher</option>
           </select>
-          {errors.position && <p className="mt-1 text-sm text-red-600">{errors.position}</p>}
+          {errors.position && <p className="mt-1 text-sm text-destructive">{errors.position}</p>}
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-primary mb-2">
             Year
           </label>
           <select
             value={formData.year}
             onChange={(e) => handleFieldChange('year', Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-black"
+            className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-primary bg-background"
           >
             {years.map(year => (
               <option key={year} value={year}>{year}</option>
@@ -384,19 +384,19 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
       </div>
       
       {/* Overall Rating Display */}
-      <div className="bg-indigo-50 rounded-lg p-4 border">
+      <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-indigo-900">Overall Rating:</span>
+          <span className="text-sm font-medium text-primary">Overall Rating:</span>
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-indigo-600">{averageRating.toFixed(1)}</span>
-            <span className="text-sm text-indigo-600 ml-1">/5.0</span>
+            <span className="text-2xl font-bold text-primary">{averageRating.toFixed(1)}</span>
+            <span className="text-sm text-primary ml-1">/5.0</span>
           </div>
         </div>
       </div>
       
       {/* Ratings */}
-      <div className="border-t pt-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-6">Rate Your Experience</h3>
+      <div className="border-t border-border pt-6">
+        <h3 className="text-lg font-medium text-primary mb-6">Rate Your Experience</h3>
         <div className="space-y-4">
           <RatingSlider
             label="Supervision Quality"
@@ -451,8 +451,8 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
       </div>
       
       {/* Review Text */}
-      <div className="border-t pt-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+      <div className="border-t border-border pt-6">
+        <label className="block text-sm font-medium text-primary mb-2">
           Your Review * (50-2000 characters)
         </label>
         <textarea
@@ -460,15 +460,15 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
           onChange={(e) => handleReviewTextChange(e.target.value)}
           onBlur={() => handleBlur('reviewText')}
           rows={6}
-          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 text-black placeholder-gray-500 ${
-            errors.reviewText ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'
+          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 text-primary bg-background placeholder-muted-foreground ${
+            errors.reviewText ? 'border-destructive focus:ring-destructive' : 'border-border focus:ring-primary focus:border-primary'
           }`}
           placeholder="Share your experience working in this lab. Be honest and constructive..."
         />
         
         <div className="flex justify-between items-center mt-2">
           <div className="flex items-center space-x-4">
-            {errors.reviewText && <p className="text-sm text-red-600">{errors.reviewText}</p>}
+            {errors.reviewText && <p className="text-sm text-destructive">{errors.reviewText}</p>}
             {moderationStatus === 'checking' && (
               <div className="flex items-center text-sm text-yellow-600">
                 <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-yellow-600 mr-1"></div>
@@ -484,7 +484,7 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
               </div>
             )}
             {moderationStatus === 'rejected' && (
-              <div className="flex items-center text-sm text-red-600">
+              <div className="flex items-center text-sm text-destructive">
                 <svg className="h-3 w-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -494,8 +494,8 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
           </div>
           
           <p className={`text-sm ml-auto ${
-            formData.reviewText.length < 50 ? 'text-red-500' : 
-            formData.reviewText.length > 2000 ? 'text-red-500' : 'text-gray-500'
+            formData.reviewText.length < 50 ? 'text-destructive' : 
+            formData.reviewText.length > 2000 ? 'text-destructive' : 'text-muted-foreground'
           }`}>
             {formData.reviewText.length} / 50-2000
           </p>
@@ -503,17 +503,17 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
       </div>
       
       {/* Submit */}
-      <div className="border-t pt-6">
+      <div className="border-t border-border pt-6">
         <button
           type="submit"
           disabled={isSubmitting || Object.keys(errors).length > 0 || moderationStatus === 'rejected'}
-          className="w-full bg-indigo-600 text-white py-3 px-6 rounded-md hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed font-medium transition-colors"
+          className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-md hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed font-medium transition-colors"
         >
           {isSubmitting ? 'Submitting...' : 'Submit Review'}
         </button>
         
         {Object.keys(errors).length > 0 && (
-          <p className="mt-2 text-sm text-gray-500 text-center">
+          <p className="mt-2 text-sm text-muted-foreground text-center">
             Please fix the errors above before submitting
           </p>
         )}
