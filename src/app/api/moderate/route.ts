@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { moderateContent, isAcademicContext } from '@/lib/moderationUtils'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(request: NextRequest) {
   try {
     const { text } = await request.json()
