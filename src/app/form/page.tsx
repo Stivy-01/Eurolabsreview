@@ -116,8 +116,26 @@ export default function FormPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-subtle py-8 px-4">
-      <motion.form
+    <div className="min-h-screen bg-gradient-subtle">
+      {/* Header */}
+      <header className="bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-soft border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <a href="/" className="text-2xl font-bold text-gradient-primary">EuroLabReviews</a>
+            </div>
+            <button
+              onClick={() => router.back()}
+              className="text-muted-foreground hover:text-foreground px-4 py-2 transition-colors"
+            >
+              ← Back
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div className="py-8 px-4">
+        <motion.form
         onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
@@ -278,6 +296,7 @@ export default function FormPage() {
           {isSubmitting ? 'Submitting...' : '🚀 Submit Review'}
         </Button>
       </motion.form>
+      </div>
     </div>
   )
 }
