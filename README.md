@@ -212,6 +212,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ for the European research community**
+**Built with ❤️ for the European research community***
 
 *Making academic career decisions more informed, one review at a time.*
