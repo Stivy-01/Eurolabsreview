@@ -116,15 +116,15 @@ export default function FormPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-subtle py-8 px-4">
       <motion.form
         onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto bg-white/80 backdrop-blur-lg shadow-xl rounded-2xl p-8 space-y-6"
+        className="max-w-3xl mx-auto bg-gradient-card backdrop-blur-lg shadow-strong rounded-2xl p-8 space-y-6"
       >
-        <h1 className="text-2xl font-bold text-center text-indigo-900">🧪 Share Your Lab Experience</h1>
+        <h1 className="text-2xl font-bold text-center text-foreground">🧪 Share Your Lab Experience</h1>
 
         <div className="grid md:grid-cols-2 gap-4">
           <AutocompleteInput
@@ -164,9 +164,9 @@ export default function FormPage() {
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Position</label>
+            <label className="text-sm font-medium text-muted-foreground mb-1 block">Position</label>
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-black focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-border rounded-md px-3 py-2 text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
               value={formData.position}
               onChange={e => handleChange('position', e.target.value)}
             >
@@ -178,9 +178,9 @@ export default function FormPage() {
             </select>
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Year</label>
+            <label className="text-sm font-medium text-muted-foreground mb-1 block">Year</label>
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-black focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-border rounded-md px-3 py-2 text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
               value={formData.year}
               onChange={e => handleChange('year', Number(e.target.value))}
             >
@@ -191,15 +191,15 @@ export default function FormPage() {
           </div>
         </div>
 
-        <div className="p-4 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-between">
-          <span className="text-sm font-medium text-indigo-900">Overall Rating</span>
-          <span className="text-xl font-bold text-indigo-700">{averageRating.toFixed(1)} / 5.0</span>
+        <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 flex items-center justify-between">
+          <span className="text-sm font-medium text-primary">Overall Rating</span>
+          <span className="text-xl font-bold text-primary">{averageRating.toFixed(1)} / 5.0</span>
         </div>
 
         <div className="space-y-4 pt-4">
           {Object.entries(formData.ratings).map(([key, val]) => (
             <div key={key} className="space-y-2">
-              <label className="text-sm font-semibold text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
+              <label className="text-sm font-semibold text-muted-foreground capitalize">{key.replace(/_/g, ' ')}</label>
               <Slider
                 defaultValue={[val]}
                 max={5}
@@ -211,53 +211,53 @@ export default function FormPage() {
         </div>
 
         <div className="pt-6 space-y-2">
-          <label className="text-sm font-semibold text-gray-700">Your Review</label>
+          <label className="text-sm font-semibold text-muted-foreground">Your Review</label>
           <Textarea
             value={formData.reviewText}
             onChange={e => handleReviewTextChange(e.target.value)}
             placeholder="Share your experience constructively..."
             rows={5}
           />
-          <p className="text-xs text-right text-gray-500">{formData.reviewText.length} / 2000</p>
-          {moderationStatus === 'rejected' && <p className="text-sm text-red-500">Please revise content</p>}
+          <p className="text-xs text-right text-muted-foreground">{formData.reviewText.length} / 2000</p>
+          {moderationStatus === 'rejected' && <p className="text-sm text-destructive">Please revise content</p>}
         </div>
 
         {/* Reviewer Identification Section */}
-        <div className="pt-6 space-y-4 p-4 rounded-lg bg-blue-50 border border-blue-200">
+        <div className="pt-6 space-y-4 p-4 rounded-lg bg-primary/5 border border-primary/20">
           <div className="flex items-center space-x-2">
             <input
               type="checkbox"
               id="anonymous"
               checked={formData.isAnonymous}
               onChange={e => handleChange('isAnonymous', e.target.checked)}
-              className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              className="rounded border-border text-primary focus:ring-primary/20"
             />
-            <label htmlFor="anonymous" className="text-sm font-medium text-gray-700">
+            <label htmlFor="anonymous" className="text-sm font-medium text-muted-foreground">
               Keep my review anonymous
             </label>
           </div>
           
           {!formData.isAnonymous && (
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium text-muted-foreground">
                 Your Name or Nickname
               </label>
               <Input
                 value={formData.reviewerName}
                 onChange={e => handleChange('reviewerName', e.target.value)}
                 placeholder="Enter your name or a nickname"
-                className={`border-gray-300 focus:ring-2 focus:ring-indigo-500 ${errors.reviewerName ? 'border-red-500' : ''}`}
+                className={`border-border focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 ${errors.reviewerName ? 'border-destructive' : ''}`}
               />
               {errors.reviewerName && (
-                <p className="text-xs text-red-500">{errors.reviewerName}</p>
+                <p className="text-xs text-destructive">{errors.reviewerName}</p>
               )}
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 💡 Identified reviews are more trusted and can help you network with other researchers
               </p>
             </div>
           )}
           
-          <div className="text-xs text-gray-600">
+          <div className="text-xs text-muted-foreground">
             {formData.isAnonymous ? (
               <span>🔒 Your review will be posted anonymously</span>
             ) : (
@@ -267,13 +267,13 @@ export default function FormPage() {
         </div>
 
         {errors.submit && (
-          <div className="text-red-500 text-sm text-center">{errors.submit}</div>
+          <div className="text-destructive text-sm text-center">{errors.submit}</div>
         )}
 
         <Button
           type="submit"
           disabled={isSubmitting || moderationStatus === 'rejected'}
-          className="w-full rounded-full bg-indigo-600 hover:bg-indigo-700 text-white"
+          className="w-full rounded-full bg-gradient-primary hover:opacity-90 transition-all duration-200 shadow-soft hover:shadow-medium text-white"
         >
           {isSubmitting ? 'Submitting...' : '🚀 Submit Review'}
         </Button>

@@ -7,7 +7,7 @@ import ForumPreview from "@/components/Forum_Preview";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: 'RateMyPI - European Research Lab Reviews',
+  title: 'EuroLabReviews',
   description: 'Anonymous reviews of Principal Investigators and research labs across Europe',
 }
 

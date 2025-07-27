@@ -42,9 +42,9 @@ const Footer = () => {
               <div className="h-10 w-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-soft">
                 <Star className="h-6 w-6 text-white" />
               </div>
-              <span className="text-2xl font-bold text-gradient-primary">
-                RateMyPI
-              </span>
+                          <span className="text-2xl font-bold text-gradient-primary">
+              EuroLabReviews
+            </span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               The trusted platform for anonymous reviews of Principal Investigators and research labs across Europe. 
@@ -129,7 +129,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="mailto:support@ratemypi.com" 
+                  href="mailto:support@eurolabreviews.eu" 
                   className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center space-x-2 group"
                 >
                   <Mail className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -138,7 +138,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="mailto:contact@ratemypi.com" 
+                  href="mailto:contact@eurolabreviews.eu" 
                   className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center space-x-2 group"
                 >
                   <Mail className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -204,7 +204,7 @@ const Footer = () => {
         <div className="border-t border-primary/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-muted-foreground">
-              © 2024 RateMyPI. All rights reserved. Empowering students to make informed academic decisions.
+              © 2025 EuroLabReviews. All rights reserved. Empowering students to make informed academic decisions.
             </div>
             <div className="flex items-center space-x-6 text-sm">
               <span className="text-muted-foreground">

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ResearchLabReviews",
+  title: "EuroLabReviews",
   description: "Anonymous reviews of Principal Investigators and research labs across Europe.",
 };
 

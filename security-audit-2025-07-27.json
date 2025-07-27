@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-07-27T06:28:12.581Z",
+  "domain": "eurolabreviews.eu",
+  "checks": {
+    "ssl": "completed",
+    "headers": "completed",
+    "dependencies": "completed",
+    "env": "completed",
+    "build": "completed"
+  }
+}

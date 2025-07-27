@@ -1,4 +1,4 @@
-# 🧪 RateMyPI - European Research Lab Reviews
+# 🧪 EuroLabReviews - European Research Lab Reviews
 
 **eurolabreviews.eu** - A platform for anonymous and identified reviews of Principal Investigators and research labs across Europe. Make informed decisions about your research career.
 
@@ -29,7 +29,7 @@
 1. **Clone and install dependencies:**
 ```bash
 git clone <your-repo>
-cd ratemypi
+cd eurolabreviews
 npm install
 ```
 
@@ -62,7 +62,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## 📁 Project Structure
 
 ```
-ratemypi/
+eurolabreviews/
 ├── src/app/              # Next.js app router pages
 │   ├── page.tsx          # Homepage with search
 │   ├── submit/           # Review submission

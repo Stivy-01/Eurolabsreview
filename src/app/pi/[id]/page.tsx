@@ -92,7 +92,7 @@ export default function PIProfilePage() {
       <div className="min-h-screen bg-gray-50">
         <header className="bg-white shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center">
-            <Link href="/" className="text-2xl font-bold text-indigo-600">RateMyPI</Link>
+            <Link href="/" className="text-2xl font-bold text-indigo-600">EuroLabReviews</Link>
           </div>
         </header>
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -118,7 +118,7 @@ export default function PIProfilePage() {
       <div className="min-h-screen bg-gray-50">
         <header className="bg-white shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center">
-            <Link href="/" className="text-2xl font-bold text-indigo-600">RateMyPI</Link>
+            <Link href="/" className="text-2xl font-bold text-indigo-600">EuroLabReviews</Link>
           </div>
         </header>
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -141,7 +141,7 @@ export default function PIProfilePage() {
       <div className="min-h-screen bg-gray-50">
         <header className="bg-white shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center">
-            <Link href="/" className="text-2xl font-bold text-indigo-600">RateMyPI</Link>
+            <Link href="/" className="text-2xl font-bold text-indigo-600">EuroLabReviews</Link>
           </div>
         </header>
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -157,16 +157,16 @@ export default function PIProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-subtle">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-soft border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-bold text-indigo-600">
-              RateMyPI
+            <Link href="/" className="text-2xl font-bold text-gradient-primary">
+              EuroLabReviews
             </Link>
             <div className="flex items-center space-x-4">
-              <Link href="/submit" className="text-indigo-600 hover:text-indigo-700 font-medium">
+              <Link href="/submit" className="text-primary hover:text-primary/80 font-medium transition-colors">
                 Write Review
               </Link>
             </div>
@@ -176,26 +176,26 @@ export default function PIProfilePage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* PI Profile Header */}
-        <div className="bg-white rounded-lg shadow-sm border p-8 mb-8">
+        <div className="bg-gradient-card rounded-lg shadow-soft border p-8 mb-8">
           <div className="flex justify-between items-start">
             <div className="flex-1">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-4xl font-bold text-foreground mb-2">
                 {profile.name}
               </h1>
-              <p className="text-xl text-gray-600 mb-4">{profile.institution}</p>
+              <p className="text-xl text-muted-foreground mb-4">{profile.institution}</p>
               {profile.field && (
-                <p className="text-lg text-gray-500 mb-6">{profile.field}</p>
+                <p className="text-lg text-muted-foreground mb-6">{profile.field}</p>
               )}
               
               <div className="flex items-center space-x-8">
                 <div>
                   <StarRating rating={profile.average_rating || 0} />
                 </div>
-                <div className="text-gray-600">
+                <div className="text-muted-foreground">
                   <span className="font-medium">{profile.review_count}</span> review{profile.review_count !== 1 ? 's' : ''}
                 </div>
                 {profile.country && (
-                  <div className="text-gray-600">
+                  <div className="text-muted-foreground">
                     📍 {profile.country}
                   </div>
                 )}
@@ -205,7 +205,7 @@ export default function PIProfilePage() {
             <div className="text-right">
               <Link
                 href="/submit"
-                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-primary hover:opacity-90 transition-all duration-200 shadow-soft hover:shadow-medium"
               >
                 Write Review
               </Link>
@@ -215,16 +215,16 @@ export default function PIProfilePage() {
 
         {/* Reviews Section */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-foreground">
             Reviews ({reviews.length})
           </h2>
           
           <div className="flex items-center space-x-2">
-            <label className="text-sm font-medium text-gray-700">Sort by:</label>
+            <label className="text-sm font-medium text-muted-foreground">Sort by:</label>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-              className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 text-black"
+              className="px-3 py-1 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 text-foreground"
             >
               <option value="newest">Newest first</option>
               <option value="oldest">Oldest first</option>
@@ -235,11 +235,11 @@ export default function PIProfilePage() {
         </div>
 
         {reviews.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg shadow-sm border">
-            <p className="text-gray-500 mb-4">No reviews yet for this PI</p>
+          <div className="text-center py-12 bg-gradient-card rounded-lg shadow-soft border">
+            <p className="text-muted-foreground mb-4">No reviews yet for this PI</p>
             <Link
               href="/submit"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-primary hover:opacity-90 transition-all duration-200 shadow-soft hover:shadow-medium"
             >
               Write the first review
             </Link>

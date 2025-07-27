@@ -1,5 +1,5 @@
 {
-  "name": "ratemypi",
+  "name": "eurolabreviews",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,9 @@
     "dev:stable": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "security-audit": "node scripts/security-audit.js",
+    "audit": "npm audit && npm audit fix"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
