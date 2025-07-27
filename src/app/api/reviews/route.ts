@@ -109,6 +109,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
+    console.log('Received review data:', body)
     
     // Validate required fields
     const { pi_name, institution, lab_group_name, field, position, year, ratings, review_text, is_anonymous, reviewer_name } = body
@@ -179,8 +180,22 @@ export async function POST(request: NextRequest) {
     
     if (insertError) {
       console.error('Database insert error:', insertError)
+      console.error('Attempted to insert data:', {
+        pi_name: pi_name.trim(),
+        institution: institution.trim(),
+        lab_group_name: lab_group_name?.trim() || null,
+        field: field?.trim() || null,
+        position,
+        year,
+        ratings,
+        review_text: review_text?.trim() || null,
+        is_anonymous: is_anonymous !== false,
+        reviewer_name: is_anonymous === false ? reviewer_name.trim() : null,
+        is_flagged: false,
+        is_approved: true
+      })
       return NextResponse.json(
-        { error: 'Failed to submit review' },
+        { error: `Failed to submit review: ${insertError.message}` },
         { status: 500 }
       )
     }

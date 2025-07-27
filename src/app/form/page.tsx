@@ -91,17 +91,36 @@ export default function FormPage() {
 
     setIsSubmitting(true)
     try {
+      // Transform camelCase to snake_case for API
+      const apiData = {
+        pi_name: formData.piName,
+        institution: formData.institution,
+        lab_group_name: formData.labGroupName,
+        field: formData.field,
+        position: formData.position,
+        year: formData.year,
+        ratings: formData.ratings,
+        review_text: formData.reviewText,
+        is_anonymous: formData.isAnonymous,
+        reviewer_name: formData.reviewerName
+      }
+
       const res = await fetch('/api/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(apiData)
       })
-      if (!res.ok) throw new Error('Failed to submit')
+      
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.error || 'Failed to submit')
+      }
+      
       // Redirect to success page or show success message
-      router.push('/submit')
+      router.push('/?submitted=true')
     } catch (err) {
       console.error('Submission error:', err)
-      setErrors({ submit: 'Failed to submit review. Please try again.' })
+      setErrors({ submit: err instanceof Error ? err.message : 'Failed to submit review. Please try again.' })
     } finally {
       setIsSubmitting(false)
     }
