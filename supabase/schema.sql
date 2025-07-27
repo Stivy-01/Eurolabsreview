@@ -1,4 +1,4 @@
--- RateMyPI Database Schema
+-- EuroLabReviews Database Schema
 
 -- Reviews table - stores all PI reviews
 CREATE TABLE IF NOT EXISTS reviews (

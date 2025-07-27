@@ -207,8 +207,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🤝 Contact
 
-- **Project Issues:** [GitHub Issues](https://github.com/your-username/ratemypi/issues)
-- **Project Discussions:** [GitHub Discussions](https://github.com/your-username/ratemypi/discussions)
+- **Project Issues:** [GitHub Issues](https://github.com/your-username/eurolabreviews/issues)
+- **Project Discussions:** [GitHub Discussions](https://github.com/your-username/eurolabreviews/discussions)
 
 ---
 

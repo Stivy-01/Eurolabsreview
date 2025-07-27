@@ -30,7 +30,7 @@ git commit -m "Initial commit: Clean project structure for eurolabreviews.eu"
 ### **Step 2: Create GitHub Repository**
 1. Go to GitHub.com
 2. Click "New repository"
-3. Name: `eurolabreviews` or `ratemypi`
+3. Name: `eurolabreviews`
 4. Make it private (recommended for now)
 5. Don't initialize with README (we already have one)
 
