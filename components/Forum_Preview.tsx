@@ -123,12 +123,6 @@ const ForumPreview = () => {
 
   const forumTopics = recentReviews.map(convertReviewToTopic);
 
-  const popularCategories = [
-    { name: "Excellent Labs", count: Math.floor(stats.totalReviews * 0.3) },
-    { name: "Good Experience", count: Math.floor(stats.totalReviews * 0.4) },
-    { name: "Mixed Reviews", count: Math.floor(stats.totalReviews * 0.2) },
-    { name: "Challenging Environment", count: Math.floor(stats.totalReviews * 0.1) }
-  ];
 
   if (isLoading) {
     return (
@@ -277,21 +271,7 @@ const ForumPreview = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-card">
-              <CardHeader>
-                <CardTitle className="text-lg">Review Categories</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {popularCategories.map((category) => (
-                  <div key={category.name} className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                    <span className="text-sm">{category.name}</span>
-                    <Badge variant="secondary" className="text-xs">
-                      {category.count}
-                    </Badge>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+           
 
             <Card className="bg-gradient-card">
               <CardHeader>

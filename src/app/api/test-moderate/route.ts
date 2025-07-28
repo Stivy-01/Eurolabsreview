@@ -21,30 +21,38 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
-    // Test 1: Basic import test
-    let importStatus = 'unknown'
+    // Test 1: Check if "flower" is being flagged
+    const hasFlower = text.toLowerCase().includes('flower')
+    const flowerWords = text.toLowerCase().split(/\s+/).filter((word: string) => word.includes('flower'))
+    
+    // Test 2: Check the actual moderation API
+    let moderationResult = null
     try {
-      // @ts-ignore - naughty-words may not have perfect TypeScript support
-      const { en } = await import('naughty-words')
-      importStatus = 'success'
-    } catch (importError) {
-      importStatus = 'failed'
-      console.error('Import error:', importError)
-    }
-
-    // Test 2: Simple moderation without naughty-words
-    const simpleModeration = {
-      isClean: text.length > 0,
-      reason: text.length === 0 ? 'Empty text' : undefined,
-      severity: text.length === 0 ? 'hard' : 'clean' as const
+      const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'}/api/moderate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      })
+      
+      moderationResult = {
+        status: response.status,
+        ok: response.ok,
+        data: await response.json()
+      }
+    } catch (error) {
+      moderationResult = {
+        error: error instanceof Error ? error.message : 'Unknown error'
+      }
     }
     
     return NextResponse.json({
       status: 'Moderation test completed',
-      importStatus,
-      simpleModeration,
+      inputText: text,
       inputLength: text.length,
-      inputText: text.substring(0, 50) + (text.length > 50 ? '...' : '')
+      hasFlower,
+      flowerWords,
+      moderationResult,
+      timestamp: new Date().toISOString()
     })
 
   } catch (error) {

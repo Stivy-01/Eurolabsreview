@@ -73,11 +73,11 @@ const Hero = () => {
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                 Find Your Perfect
                 <span className="block text-gradient-primary">
-                  European Lab Reviews
+                  European Lab
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-lg">
-                Anonymous reviews and honest discussions about PIs, labs, and research opportunities across Europe. Make informed decisions about your academic future.
+                Anonymous  and honest reviews about PIs, labs, and research opportunities across Europe. Make informed decisions about your academic future.
               </p>
             </div>
 

@@ -102,8 +102,15 @@ export async function POST(request: NextRequest) {
   try {
     // Check if Supabase is properly configured
     if (!isSupabaseConfigured()) {
+      console.error('Supabase not configured. Environment variables missing.')
       return NextResponse.json(
-        { error: 'Database not configured. Please set up your Supabase environment variables.' },
+        { 
+          error: 'Database not configured. Please set up your Supabase environment variables.',
+          details: {
+            url: process.env.NEXT_PUBLIC_SUPABASE_URL ? 'Set' : 'Missing',
+            key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'Set' : 'Missing'
+          }
+        },
         { status: 503 }
       )
     }
