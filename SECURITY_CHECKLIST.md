@@ -26,7 +26,7 @@
 ### ✅ Environment Variables
 - [x] NEXT_PUBLIC_SUPABASE_URL (public, safe)
 - [x] NEXT_PUBLIC_SUPABASE_ANON_KEY (public, safe)
-- [ ] SUPABASE_SERVICE_ROLE_KEY (private, keep secret)
+- [x] SUPABASE_SERVICE_ROLE_KEY (private, keep secret)
 - [ ] OPENAI_API_KEY (private, if using AI moderation)
 
 ### ✅ Database Security
