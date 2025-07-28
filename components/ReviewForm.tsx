@@ -152,7 +152,10 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
 
   // Check moderation in real-time as user types
   const checkModeration = useCallback(async (text: string) => {
-    if (text.length < 10) return
+    if (text.length < 10) {
+      setModerationStatus('idle')
+      return
+    }
     
     setModerationStatus('checking')
     
@@ -181,7 +184,7 @@ export default function ReviewForm({ onSuccess, onError, isSubmitting, setIsSubm
     
     // Debounce moderation check
     const timeoutId = setTimeout(() => {
-      if (value.length >= 50) {
+      if (value.length >= 10) {
         checkModeration(value)
       } else {
         setModerationStatus('idle')
