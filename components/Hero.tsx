@@ -141,7 +141,7 @@ const Hero = () => {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-strong">
               <img 
-                src={"https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} 
+                src={"https://hammeskrause.de/wp-content/uploads/2023/02/MPSD-1.jpg"}
                 alt="European research laboratories" 
                 className="w-full h-[400px] object-cover"
               />
