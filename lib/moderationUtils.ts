@@ -1,8 +1,18 @@
 // @ts-ignore - naughty-words may not have perfect TypeScript support
-import { en } from 'naughty-words'
+let BASE_BAD_WORDS: string[] = []
 
-// Base word list from naughty-words (comprehensive English)
-const BASE_BAD_WORDS = en
+// Try to import naughty-words, fallback to basic list if it fails
+try {
+  const { en } = require('naughty-words')
+  BASE_BAD_WORDS = en
+} catch (error) {
+  console.warn('naughty-words import failed, using fallback list:', error)
+  // Fallback to a basic list of inappropriate words
+  BASE_BAD_WORDS = [
+    'fuck', 'shit', 'bitch', 'asshole', 'dick', 'pussy', 'cock', 'cunt',
+    'faggot', 'nigger', 'nigga', 'whore', 'slut', 'bastard', 'motherfucker'
+  ]
+}
 
 // Simplified character substitution mapping (most common ones only)
 const CHAR_SUBSTITUTIONS: { [key: string]: string[] } = {

@@ -3,6 +3,20 @@ import { moderateContent, isAcademicContext } from '@/lib/moderationUtils'
 
 export const dynamic = 'force-dynamic'
 
+export async function GET(request: NextRequest) {
+  return NextResponse.json({
+    status: 'Moderation API is working',
+    message: 'Use POST method with JSON body: { "text": "your review text" }',
+    methods: ['GET', 'POST'],
+    features: [
+      'Content moderation with naughty-words',
+      'Obfuscation detection',
+      'Academic context awareness',
+      'Length validation (10-2000 chars)'
+    ]
+  })
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { text } = await request.json()
@@ -14,19 +28,40 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Step 1: Advanced content moderation with obfuscation detection
-    const moderationResult = moderateContent(text)
+    // Step 1: Try advanced content moderation with error handling
+    let moderationResult
+    try {
+      moderationResult = moderateContent(text)
+    } catch (moderationError) {
+      console.error('Moderation function failed:', moderationError)
+      // Fallback to basic checks
+      moderationResult = {
+        isClean: text.length >= 10 && text.length <= 2000,
+        reason: text.length < 10 ? 'Review is too short' : 
+                text.length > 2000 ? 'Review is too long' : undefined,
+        severity: 'clean' as const
+      }
+    }
+
     const academic = isAcademicContext(text)
     
     if (!moderationResult.isClean) {
       // Log the moderation decision
       const severity = moderationResult.severity === 'hard' ? 'REJECTED_HARD' : 'REJECTED_SOFT'
-      await logModerationDecision(text, severity, moderationResult.reason || 'Content moderation triggered', 'AUTO')
+      try {
+        await logModerationDecision(text, severity, moderationResult.reason || 'Content moderation triggered', 'AUTO')
+      } catch (logError) {
+        console.error('Failed to log moderation decision:', logError)
+      }
       
       // Be more lenient for academic content with soft violations
       if (academic && moderationResult.severity === 'soft') {
         // Allow academic content with soft violations but log it
-        await logModerationDecision(text, 'ACCEPTED', 'Academic context override for soft violation', 'AUTO')
+        try {
+          await logModerationDecision(text, 'ACCEPTED', 'Academic context override for soft violation', 'AUTO')
+        } catch (logError) {
+          console.error('Failed to log academic override:', logError)
+        }
       } else {
         return NextResponse.json(
           { 
@@ -60,7 +95,11 @@ export async function POST(request: NextRequest) {
       try {
         const llmResult = await checkWithLLM(text)
         if (llmResult.isRejected) {
-          await logModerationDecision(text, 'REJECTED_SOFT', llmResult.reason, 'LLM')
+          try {
+            await logModerationDecision(text, 'REJECTED_SOFT', llmResult.reason, 'LLM')
+          } catch (logError) {
+            console.error('Failed to log LLM rejection:', logError)
+          }
           
           return NextResponse.json(
             { status: 'REJECTED', reason: llmResult.reason },
@@ -74,7 +113,11 @@ export async function POST(request: NextRequest) {
     }
 
     // If all checks pass
-    await logModerationDecision(text, 'ACCEPTED', 'Passed all moderation checks', 'AUTO')
+    try {
+      await logModerationDecision(text, 'ACCEPTED', 'Passed all moderation checks', 'AUTO')
+    } catch (logError) {
+      console.error('Failed to log acceptance:', logError)
+    }
     
     return NextResponse.json({ status: 'ACCEPTED' })
 
